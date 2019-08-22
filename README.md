@@ -4,14 +4,15 @@ A D&amp;D 3.5 and Pathfinder 1 resource
 
 #Environment Variables
 
-psqlDB
+PSQL_DB
 
-psqlPort
+PSQL_PORT
 
-psqlPassword
+PSQL_PASSWORD
 
-psqlDB
+PSQL_USER
 
+PORT
 
 #Setup
 

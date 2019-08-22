@@ -3,7 +3,8 @@
       {
          "name": "Weapon Focus",
          "version": "Pathfinder",
-         "types": [
+         "type": "scythe",
+         "categories": [
             "Combat"
          ],
          "prerequisites": [
@@ -30,7 +31,8 @@
       {
          "name": "Weapon Specialization",
          "version": "Pathfinder",
-         "types": [
+         "type": "scythe",
+         "categories": [
             "Combat"
          ],
          "prerequisites": [
