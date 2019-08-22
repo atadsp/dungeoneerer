@@ -14,8 +14,12 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-const PORT = process.env.PORT || 2000;
+const PORT = process.env.PORT;
 
-app.listen(PORT, () => {
-  console.log("It's working! It's working! " + PORT);
-});
+if(PORT){
+  app.listen(PORT, () => {
+    console.log("It's working! It's working! " + PORT);
+  });
+} else {
+  console.log("ENV's are not set, please set them in the .env");
+}
