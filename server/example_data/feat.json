@@ -1,0 +1,14 @@
+{
+    "name":"feat_name",
+    "prerequisites":[
+       {
+          "prepreqA":"example"
+       },
+       {
+          "prepreqB":"so on"
+       }
+    ],
+    "description":"",
+    "special":"",
+    "normal":""
+ }
