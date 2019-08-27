@@ -5,7 +5,6 @@
 CREATE TABLE dungeoneerer.feats
 (
     feat_id SERIAL PRIMARY KEY,
-    version_id INT,
     name varchar(255) NOT NULL,
     type varchar(255),
     categories jsonb,
@@ -14,6 +13,5 @@ CREATE TABLE dungeoneerer.feats
     description varchar NOT NULL,
     benefit varchar NOT NULL,
     special varchar,
-    normal varchar,
-    FOREIGN KEY (version_id) REFERENCES dungeoneerer.versions(version_id)
+    normal varchar
 )
