@@ -5,6 +5,6 @@
 CREATE TABLE dungeoneerer.feat_names
 (
     feat_name_id SERIAL PRIMARY KEY,
-    short_description varchar NOT NULL,
-    name varchar(255) NOT NULL
+    name varchar(255) NOT NULL,
+    short_description varchar NOT NULL
 )

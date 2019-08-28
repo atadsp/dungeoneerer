@@ -3,7 +3,7 @@
       {
          "name": "Weapon Focus",
          "version": "Pathfinder",
-         "type": "scythe",
+         "type": true,
          "categories": [
             "Combat"
          ],
@@ -11,7 +11,7 @@
             {
                "prerequisite": "Proficiency with selected weapon",
                "proficency": {
-                  "weapon": "scythe"
+                  "weapon": "type"
                }
             },
             {
@@ -21,7 +21,7 @@
          ],
          "gameEffects": [{
             "attackBonus": 1,
-            "weapon": "scythe"
+            "weapon": "type"
          }],
          "description": "Choose one type of weapon. You can also choose unarmed strike or grapple (or ray, if you are a spellcaster) as your weapon for the purposes of this feat.",
          "benefit": "You gain a +1 bonus on all attack rolls you make using the selected weapon.",
@@ -31,7 +31,7 @@
       {
          "name": "Weapon Specialization",
          "version": "Pathfinder",
-         "type": "scythe",
+         "type": true,
          "categories": [
             "Combat"
          ],
@@ -39,14 +39,14 @@
             {
                "prerequisite": "Proficiency with selected weapon",
                "proficency": {
-                  "weapon": "scythe"
+                  "weapon": "type"
                }
             },
             {
                "prerequisite": "Weapon Focus with selected weapon",
                "feat": {
                   "name": "Weapon Focus",
-                  "weapon": "scythe"
+                  "weapon": "type"
                }
             },
             {
@@ -59,7 +59,7 @@
          "gameEffects": [
             {
             "damageBonus": 2,
-            "weapon": "scythe"
+            "weapon": "type"
             }
          ],
          "description": "You are skilled at dealing damage with one weapon. Choose one type of weapon (including unarmed strike or grapple) for which you have already selected the Weapon Focus feat. You deal extra damage when using this weapon.",

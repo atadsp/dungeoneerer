@@ -6,7 +6,7 @@ CREATE TABLE dungeoneerer.feats
 (
     feat_id SERIAL PRIMARY KEY,
     name varchar(255) NOT NULL,
-    type varchar(255),
+    type boolean NOT NULL DEFAULT false,
     categories jsonb,
     prerequisites jsonb,
     game_effects jsonb,

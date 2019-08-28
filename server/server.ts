@@ -11,7 +11,7 @@ const PORT = process.env.PORT;
 
 if(PORT){
   app.listen(PORT, () => {
-    const text = "SELECT type, categories, prerequisites, game_effects, description, benefit, special, normal, feats.name AS name, versions.name AS version_name FROM dungeoneerer.feats feats, dungeoneerer.versions versions WHERE versions.version_id = feats.version_id"
+    const text =` SELECT fn.short_description, fn.name, f.name as feat_name, f.type, f.categories, f.prerequisites, f.game_effects, f.description, f.benefit, f.special, f.normal, b.name as book_name, v.name as version_name FROM dungeoneerer.feat_names as fn LEFT JOIN dungeoneerer.feat_index as fi ON fn.feat_name_id = fi.feat_name_id LEFT JOIN dungeoneerer.feats as f ON fi.feat_id = f.feat_id LEFT JOIN dungeoneerer.books as b ON fi.book_id = b.book_id LEFT JOIN dungeoneerer.versions as v ON fi.version_id = v.version_id;`
     // const params = ["%Weapon%", 1]
     database.query(text, "", (err:any, res:any)=>{
       if(err){
