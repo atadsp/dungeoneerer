@@ -1,7 +1,8 @@
 import bodyParser = require("body-parser");
 import express = require("express");
+import { IRouter } from "./router.interface";
 
-class Router {
+class Router implements IRouter {
     public build(): express.Express {
         const app = express();
         app.use(bodyParser.json());
