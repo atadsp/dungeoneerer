@@ -1,9 +1,8 @@
 import bodyParser = require("body-parser");
 import express = require("express");
 import Database from "../database/database.class";
-import { IRouter } from "./router.interface";
 
-class Router implements IRouter {
+class Router {
     public build(): express.Express {
         const app = express();
         app.use(bodyParser.json());
@@ -28,11 +27,9 @@ f.special, f.normal, b.name as book_name, v.name as version_name
 `;
 // const params = ["%Weapon%", 1]
             Database.query(text, "", (err: any, dbRes: any) => {
-                console.log("Here");
                 if (err) {
-                    console.error(err);
+                    res.send(err);
                 } else {
-                    console.log(dbRes.rows);
                     res.send(dbRes.rows);
                 }
             });

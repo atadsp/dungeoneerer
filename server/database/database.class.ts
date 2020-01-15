@@ -1,8 +1,7 @@
 import pg = require("pg");
-import { IDatabase } from "./database.interface";
 const pool = new pg.Pool();
 
-class Database implements IDatabase {
+class Database {
   public getClient(callback: any): void {
     pool.connect((err: any, client: any, done: any) => {
       const query = client.query.bind(client);
