@@ -1,17 +1,18 @@
 # Dungeoneerer
 A D&amp;D 3.5 and Pathfinder 1 resource
 
+## Environment Variables
 
-#Environment Variables
+* PORT
+* PGUSER
+* PGHOST
+* PGPASSWORD
+* PGDATABASE
+* PGPORT
 
-PORT
-PGUSER
-PGHOST
-PGPASSWORD
-PGDATABASE
-PGPORT
+## Setup
+1. ```git clone```
+2. fill in .env file
 
-#Setup
-
-
-#Launch
+## Launch
+```npm start```
