@@ -12,7 +12,7 @@ A D&amp;D 3.5 and Pathfinder 1 resource
 
 ## Setup
 1. ```git clone```
-2.```npm install```
+2. ```npm install```
 3. fill in .env file
 
 ## Launch
