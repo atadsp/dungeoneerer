@@ -14,4 +14,4 @@ CREATE TABLE dungeoneerer.feats
     benefit varchar NOT NULL,
     special varchar,
     normal varchar
-)
+);

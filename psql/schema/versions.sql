@@ -6,4 +6,4 @@ CREATE TABLE dungeoneerer.versions
 (
     version_id  SERIAL PRIMARY KEY,
     name varchar(255) NOT NULL
-)
+);

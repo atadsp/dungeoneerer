@@ -46,7 +46,8 @@
                "prerequisite": "Weapon Focus with selected weapon",
                "feat": {
                   "name": "Weapon Focus",
-                  "weapon": "type"
+                  "weapon": "type",
+                  "feat_id": 1
                }
             },
             {
