@@ -1,6 +1,6 @@
 import bodyParser = require("body-parser");
 import express = require("express");
-import Database from "../database/database.class";
+import Feats from "../services/feat-service/feat.class";
 
 class Router {
     public build(): express.Express {
@@ -11,29 +11,13 @@ class Router {
         }));
 
         app.get("/", (req: any, res: any) => {
-            console.log("running query");
-            const text = `
-SELECT fn.short_description, fn.name, f.name as feat_name, f.type, f.categories, f.prerequisites, f.game_effects, f.description, f.benefit,
-f.special, f.normal, b.name as book_name, v.name as version_name
-  FROM dungeoneerer.feat_index as fi
-  LEFT JOIN dungeoneerer.feat_names as fn
-  ON fi.feat_name_id = fn.feat_name_id
-  LEFT JOIN dungeoneerer.feats as f
-  ON fi.feat_id = f.feat_id
-  LEFT JOIN dungeoneerer.books as b
-  ON fi.book_id = b.book_id
-  LEFT JOIN dungeoneerer.versions as v
-  ON b.version_id = v.version_id;
-`;
-// const params = ["%Weapon%", 1]
-            Database.query(text, "", (err: any, dbRes: any) => {
-                if (err) {
-                    res.send(err);
-                } else {
-                    res.send(dbRes.rows);
-                }
-            });
+           res.send("base route");
         });
+
+        app.get("/api/feats", async (req: any, res: any) => {
+            const feats = await Feats.getFeat();
+            res.send(feats);
+         });
 
         return app;
     }

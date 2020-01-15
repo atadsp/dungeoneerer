@@ -1,4 +1,5 @@
 import pg = require("pg");
+
 const pool = new pg.Pool();
 
 class Database {
@@ -28,13 +29,12 @@ class Database {
     });
   }
 
-  public query(text: string, params: any, callback: any): void {
-    const start = Date.now();
-    return pool.query(text, params, (err, res) => {
-      const duration = Date.now() - start;
-      console.log("executed query", { text, duration});
-      callback(err, res);
-    });
+  public async query(text: string, params: any): Promise<void | any[]> {
+    return await pool.query(text, params)
+        .then((res) => {
+          return res.rows;
+        })
+        .catch((e) => console.error(e.stack));
   }
 }
 
