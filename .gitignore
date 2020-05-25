@@ -1,5 +1,7 @@
 /node_modules
 .env
+/psql/liquibase.properties
+/psql/postgresql-42.2.12.jar
 # Ignores compiled TypeScript files
 **/*.map
 **/*.js

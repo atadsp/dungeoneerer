@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+    
+    <property name="TABLESPACE" value="${DB_SCHEMA}_TBLSPACE"/>
+    <property name="APP_USER" value="${DB_SCHEMA}_APP_USER"/>
+    <property name="RO_USER" value="${DB_SCHEMA}_RO"/>
+    
+    <include file="ddls/versions/001.sql" relativeToChangelogFile="true" />
+    <include file="ddls/books/001.sql" relativeToChangelogFile="true" />
+    <include file="ddls/feats/001.sql" relativeToChangelogFile="true" />
+    <include file="dmls/001.sql" relativeToChangelogFile="true" />
+    <include file="dmls/002.sql" relativeToChangelogFile="true" />
+    <include file="dmls/003.sql" relativeToChangelogFile="true" />
+    <include file="dmls/004.sql" relativeToChangelogFile="true" />
+    
+</databaseChangeLog>
