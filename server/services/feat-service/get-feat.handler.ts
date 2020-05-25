@@ -1,7 +1,5 @@
 import Database from "../../database/database.class";
 import { IFeatPrereq } from "../feat-prereq-service/feat-prereq.interface";
-import Utility from "../utility.class";
-import { IErr } from "../utility.interface";
 import { IFeat } from "./feat.interface";
 
 const getFeatQuery = `
@@ -29,40 +27,34 @@ WHERE fp.feat_id=$1;
 `;
 
 class GetFeat {
-    public async getFeat(): Promise < IFeat[] | IErr > {
+    public async getFeat(): Promise < IFeat[] > {
         console.log("Getting Feats");
 
         const query = getFeatQuery + ";";
-        const results = await Database.query(query, "");
-        const errors = Utility.checkDBResult(results, true);
-
-        if ("error" in errors && errors.error !== "") {
-            return errors;
-        }
+        const results = await Database.query(query, "")
+            .catch((e) => {
+                throw e;
+            });
 
         return results as IFeat[];
     }
 
-    public async getFeatByID(id: any): Promise < IFeat | IErr > {
+    public async getFeatByID(id: any): Promise < IFeat > {
         console.log("Getting Feat: ", id);
 
         const query = getFeatQuery + "WHERE f.feat_id=$1;";
         const parameters = [id];
-        const results = await Database.query(query, parameters);
-
-        let errors = Utility.checkDBResult(results, true);
-        if ("error" in errors && errors.error !== "") {
-            return errors;
-        }
+        const results = await Database.query(query, parameters)
+            .catch((e) => {
+                throw e;
+            });
 
         const feat = results[0] as IFeat;
 
-        const featPrereq = await Database.query(getFeatPrereqs, [feat.feat_id]);
-
-        errors = Utility.checkDBResult(featPrereq, false);
-        if ("error" in errors && errors.error !== "") {
-            return errors;
-        }
+        const featPrereq = await Database.query(getFeatPrereqs, [feat.feat_id])
+            .catch((e) => {
+                throw e;
+            });
 
         feat.required_for = featPrereq as IFeatPrereq[];
 

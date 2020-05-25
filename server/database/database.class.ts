@@ -29,13 +29,13 @@ class Database {
     });
   }
 
-  public async query(text: string, params: any): Promise<any | any[]> {
+  public async query(text: string, params: any): Promise<any> {
     return await pool.query(text, params)
       .then((res) => {
         return res.rows;
       })
       .catch((e) => {
-        return e;
+        throw e;
       });
 
   }

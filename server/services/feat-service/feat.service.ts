@@ -7,12 +7,11 @@ import InsertFeat from "./insert-feat.handler";
 class Feats {
     public NewFeatService(app: express.Express): express.Express {
         app.get("/api/v1/feats", async (req: any, res: any) => {
-            const resp = await GetFeat.getFeat();
-
-            if ("error" in resp) {
-                res.status(resp.status).send(resp.error);
-                return;
-            }
+            const resp = await GetFeat.getFeat()
+                .catch((e) => {
+                    res.status(400).send(e);
+                    return;
+                });
 
             res.send(resp);
         });
@@ -23,23 +22,22 @@ class Feats {
                 return;
             }
 
-            const resp = await GetFeat.getFeatByID(req.params.id);
-
-            if ("error" in resp) {
-                res.status(resp.status).send(resp.error);
-                return;
-            }
+            const resp = await GetFeat.getFeatByID(req.params.id)
+                .catch((e) => {
+                    res.status(400).send(e);
+                    return;
+                });
 
             res.send(resp);
         });
 
         app.post("/api/v1/feat", async (req: any, res: any) => {
-            const resp = await InsertFeat.insertFeat(req.body as IFeat);
 
-            if ("error" in resp) {
-                res.status(resp.status).send(resp.error);
-                return;
-            }
+            const resp = await InsertFeat.insertFeat(req.body as IFeat)
+                .catch((e) => {
+                    res.status(400).send(e);
+                    return;
+                });
 
             res.status(201).send(resp);
         });
@@ -62,14 +60,14 @@ class Feats {
                 return;
             }
 
-            const resp = await DeleteFeat.deleteFeatById(req.params.id);
-
-            if (resp && "error" in resp) {
-                res.status(resp.status).send(resp.error);
-                return;
-            }
-
-            res.status(204).send("");
+            await DeleteFeat.deleteFeatById(req.params.id)
+                .then(() => {
+                    res.status(204).send("");
+                })
+                .catch((e) => {
+                    res.status(400).send(e);
+                    return;
+                });
         });
 
         return app;

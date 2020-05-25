@@ -1,6 +1,4 @@
 import Database from "../../database/database.class";
-import Utility from "../utility.class";
-import { IErr } from "../utility.interface";
 
 const deleteFeatQuery = `
 DELETE FROM dungeoneerer.feats
@@ -8,16 +6,15 @@ WHERE feat_id = $1;
 `;
 
 class GetFeat {
-    public async deleteFeatById(id: any): Promise < any | IErr > {
+    public async deleteFeatById(id: any): Promise < null > {
         console.log("Deleting Feat: ", id);
-        const results = await Database.query(deleteFeatQuery, [id]);
-        const errors = Utility.checkDBResult(results, false);
 
-        if ("error" in errors && errors.error !== "") {
-            return errors;
-        }
+        await Database.query(deleteFeatQuery, [id])
+            .catch((e) => {
+                throw e;
+            });
 
-        return;
+        return null;
     }
 }
 
