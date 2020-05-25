@@ -51,7 +51,7 @@ class InsertFeat {
         const feat_name_id = insertFeatNameResults[0].feat_name_id;
 
         const insertFeatIndexParam = [feat_id, feat_name_id, feat.book_id, feat.page_number];
-        const insertFeatIndexResults = await Database.query(insertFeatIndex, insertFeatIndexParam)
+        await Database.query(insertFeatIndex, insertFeatIndexParam)
             .catch((e) => {
                 throw e;
             });
@@ -60,7 +60,7 @@ class InsertFeat {
             for (const i in feat.prerequisites) {
                 if ("feat" in feat.prerequisites[i] && "feat_id" in feat.prerequisites[i].feat) {
                     const insertFeatPrereqParam = [feat.prerequisites[i].feat.feat_id, feat_id];
-                    const insertFeatPrereqResults = await Database.query(insertIntoFeatPrereq, insertFeatPrereqParam)
+                    await Database.query(insertIntoFeatPrereq, insertFeatPrereqParam)
                         .catch((e) => {
                             throw e;
                         });
