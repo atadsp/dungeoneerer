@@ -1,43 +1,30 @@
-import pg = require("pg");
+import * as pg from "pg";
 
 const pool = new pg.Pool();
 
+pool.on("error", (err, client) => {
+  console.error("Unexpected error on idle client", err);
+  process.exit(-1);
+});
+
 class Database {
-  public getClient(callback: any): void {
-    pool.connect((err: any, client: any, done: any) => {
-      const query = client.query.bind(client);
-      // monkey patch the query method to keep track of the last query executed
-      client.query = () => {
-        client.lastQuery = arguments;
-        client.query.apply(client, arguments);
-      };
-
-      // set a timeout of 5 seconds, after which we will log this client's last query
-      const timeout = setTimeout(() => {
-        console.error("A client has been checked out for more than 5 seconds!");
-        console.error(`The last executed query on this client was: ${client.lastQuery}`);
-      }, 5000);
-      const release = (relErr: any) => {
-        // call the actual 'done' method, returning this client to the pool
-        done(relErr);
-        // clear our timeout
-        clearTimeout(timeout);
-        // set the query method back to its old un-monkey-patched version
-        client.query = query;
-      };
-      callback(err, client, release);
-    });
-  }
-
-  public async query(text: string, params: any): Promise<any> {
-    return await pool.query(text, params)
-      .then((res) => {
-        return res.rows;
+  public async query(queryString: string, params: any[]): Promise<any> {
+    return await pool
+      .connect()
+      .then(async (client) => {
+        try {
+          const res = await client.query(queryString, params);
+          client.release();
+          return res.rows;
+        } catch (err) {
+          client.release();
+          console.log(err.stack);
+          throw err;
+        }
       })
       .catch((e) => {
         throw e;
       });
-
   }
 }
 

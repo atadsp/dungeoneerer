@@ -4,25 +4,25 @@ import { IFeat } from "./feat.interface";
 
 const getFeatQuery = `
 SELECT fn.short_description, fn.name, f.name as feat_name, f.type, f.categories, f.prerequisites, f.game_effects, f.description, f.benefit,
-f.special, f.normal, f.feat_id, fn.feat_name_id, b.name as book_name, fi.page_number, b.book_id, v.name as version_name, v.version_id
+f.special, f.normal, f.id as id, fn.id as feat_name_id, b.name as book_name, fi.page_number, b.id as book_id, v.name as version_name, v.id as version_id
 FROM dungeoneerer.feat_index as fi
 LEFT JOIN dungeoneerer.feat_names as fn
-ON fi.feat_name_id = fn.feat_name_id
+ON fi.feat_name_id = fn.id
 LEFT JOIN dungeoneerer.feats as f
-ON fi.feat_id = f.feat_id
+ON fi.feat_id = f.id
 LEFT JOIN dungeoneerer.books as b
-ON fi.book_id = b.book_id
+ON fi.book_id = b.id
 LEFT JOIN dungeoneerer.versions as v
-ON b.version_id = v.version_id
+ON b.version_id = v.id
 `;
 
-const getFeatPrereqs = `
-SELECT fn.name, fn.short_description, fp.prerequisite_feat_id as required_for
+const getFeatsRequiredFor = `
+SELECT fn.name, fn.short_description, fp.prerequisite_feat_id
 FROM dungeoneerer.feat_prerequisites as fp
 LEFT JOIN dungeoneerer.feat_index as fi
 ON fi.feat_id = fp.prerequisite_feat_id
 LEFT JOIN dungeoneerer.feat_names as fn
-ON fn.feat_name_id=fi.feat_name_id
+ON fn.id=fi.feat_name_id
 WHERE fp.feat_id=$1;
 `;
 
@@ -31,7 +31,7 @@ class GetFeat {
         console.log("Getting Feats");
 
         const query = getFeatQuery + ";";
-        const results = await Database.query(query, "")
+        const results = await Database.query(query, [])
             .catch((e) => {
                 throw e;
             });
@@ -42,7 +42,7 @@ class GetFeat {
     public async getFeatByID(id: any): Promise < IFeat > {
         console.log("Getting Feat: ", id);
 
-        const query = getFeatQuery + "WHERE f.feat_id=$1;";
+        const query = getFeatQuery + "WHERE f.id=$1;";
         const parameters = [id];
         const results = await Database.query(query, parameters)
             .catch((e) => {
@@ -51,7 +51,7 @@ class GetFeat {
 
         const feat = results[0] as IFeat;
 
-        const featPrereq = await Database.query(getFeatPrereqs, [feat.feat_id])
+        const featPrereq = await Database.query(getFeatsRequiredFor, [feat.id])
             .catch((e) => {
                 throw e;
             });

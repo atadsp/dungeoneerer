@@ -18,13 +18,13 @@ A D&amp;D 3.5 and Pathfinder 1 resource
 3. ```nvm install```
 4. ```nvm use```
 5. ```npm install```
-6. fill in .env file
+6. fill in .env file in the root directory
 
 ### Deploying the Database 
 1. Download and install postgres
 2. Download and install liquibase
 3. cd into the psql directory 
-4. setup your `liquibase.properties` file 
+4. setup your `liquibase.properties` file in the psql directory
 5. ```liquibase update```
 
 ## Launch

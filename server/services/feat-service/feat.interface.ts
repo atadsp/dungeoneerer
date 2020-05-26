@@ -12,7 +12,7 @@ export interface IFeat {
     benefit: string;
     special: string;
     normal: string;
-    feat_id: number;
+    id: number;
     feat_name_id: number;
     book_name: string;
     page_number: number;

@@ -5,7 +5,7 @@ const insertFeatQuery = `
 INSERT INTO dungeoneerer.feats
 (name, type, categories, prerequisites, game_effects, description, benefit, special, normal)
 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
-RETURNING feat_id
+RETURNING id
 `;
 
 const insertFeatName = `
@@ -13,7 +13,7 @@ INSERT INTO dungeoneerer.feat_names
 (name, short_description)
 VALUES ($1, $2)
 ON CONFLICT(name) DO UPDATE SET name = EXCLUDED.name
-RETURNING feat_name_id;
+RETURNING id;
 `;
 
 const insertFeatIndex = `
@@ -40,7 +40,7 @@ class InsertFeat {
                 throw e;
             });
 
-        const feat_id = insertFeatResults[0].feat_id;
+        const featId = insertFeatResults[0].id;
 
         const insertFeatNameParams = [feat.name, feat.short_description];
         const insertFeatNameResults = await Database.query(insertFeatName, insertFeatNameParams)
@@ -48,9 +48,9 @@ class InsertFeat {
                 throw e;
             });
 
-        const feat_name_id = insertFeatNameResults[0].feat_name_id;
+        const featNameId = insertFeatNameResults[0].id;
 
-        const insertFeatIndexParam = [feat_id, feat_name_id, feat.book_id, feat.page_number];
+        const insertFeatIndexParam = [featId, featNameId, feat.book_id, feat.page_number];
         await Database.query(insertFeatIndex, insertFeatIndexParam)
             .catch((e) => {
                 throw e;
@@ -59,7 +59,7 @@ class InsertFeat {
         if (feat.prerequisites.length > 0) {
             for (const i in feat.prerequisites) {
                 if ("feat" in feat.prerequisites[i] && "feat_id" in feat.prerequisites[i].feat) {
-                    const insertFeatPrereqParam = [feat.prerequisites[i].feat.feat_id, feat_id];
+                    const insertFeatPrereqParam = [feat.prerequisites[i].feat.feat_id, featId];
                     await Database.query(insertIntoFeatPrereq, insertFeatPrereqParam)
                         .catch((e) => {
                             throw e;
@@ -68,7 +68,7 @@ class InsertFeat {
             }
         }
 
-        feat.feat_id = feat_id;
+        feat.id = featId;
 
         return feat;
     }

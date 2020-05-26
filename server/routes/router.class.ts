@@ -1,5 +1,5 @@
-import bodyParser = require("body-parser");
-import express = require("express");
+import * as bodyParser from "body-parser";
+import express from "express";
 import Feats from "../services/feat-service/feat.service";
 
 class Router {

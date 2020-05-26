@@ -1,8 +1,9 @@
-import express = require("express");
+import * as express from "express";
 import DeleteFeat from "./delete-feat.handler";
 import {IFeat} from "./feat.interface";
 import GetFeat from "./get-feat.handler";
 import InsertFeat from "./insert-feat.handler";
+import UpdateFeat from "./update-feat.handler";
 
 class Feats {
     public NewFeatService(app: express.Express): express.Express {
@@ -16,7 +17,7 @@ class Feats {
             res.send(resp);
         });
 
-        app.get("/api/v1/feat/:id", async (req: any, res: any) => {
+        app.get("/api/v1/feats/:id", async (req: any, res: any) => {
             if (!req.params.id) {
                 res.status("No ID provided").send(400);
                 return;
@@ -31,7 +32,7 @@ class Feats {
             res.send(resp);
         });
 
-        app.post("/api/v1/feat", async (req: any, res: any) => {
+        app.post("/api/v1/feats", async (req: any, res: any) => {
 
             const resp = await InsertFeat.insertFeat(req.body as IFeat)
                 .catch((e) => {
@@ -42,19 +43,24 @@ class Feats {
             res.status(201).send(resp);
         });
 
-        app.patch("/api/v1/feat/:id", async (req: any, res: any) => {
+        app.patch("/api/v1/feats/:id", async (req: any, res: any) => {
             console.log("Patching", req.params.id);
             if (!req.params.id) {
                 console.log("test1");
                 res.status("No ID provided").send(400);
                 return;
             }
-            console.log("test2");
 
-            res.status(202).send("");
+            const feat = await UpdateFeat.updateFeatById(req.body, req.params.id)
+                .catch((e) => {
+                    res.status(400).send(e);
+                    return;
+                });
+
+            res.status(202).send(feat);
         });
 
-        app.delete("/api/v1/feat/:id", async (req: any, res: any) => {
+        app.delete("/api/v1/feats/:id", async (req: any, res: any) => {
             if (!req.params.id) {
                 res.status("No ID provided").send(400);
                 return;
