@@ -20,4 +20,5 @@ export interface IFeat {
     version_name: string;
     version_id: number;
     required_for: IFeatPrereq[];
+    requires: IFeatPrereq[];
 }

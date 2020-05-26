@@ -26,6 +26,16 @@ ON fn.id=fi.feat_name_id
 WHERE fp.feat_id=$1;
 `;
 
+const getFeatsRequires = `
+SELECT fn.name, fn.short_description, fp.feat_id
+FROM dungeoneerer.feat_prerequisites as fp
+LEFT JOIN dungeoneerer.feat_index as fi
+ON fi.feat_id = fp.feat_id
+LEFT JOIN dungeoneerer.feat_names as fn
+ON fn.id=fi.feat_name_id
+WHERE fp.prerequisite_feat_id=$1;
+`;
+
 class GetFeat {
     public async getFeat(): Promise < IFeat[] > {
         console.log("Getting Feats");
@@ -51,12 +61,19 @@ class GetFeat {
 
         const feat = results[0] as IFeat;
 
-        const featPrereq = await Database.query(getFeatsRequiredFor, [feat.id])
+        const prereqFor = await Database.query(getFeatsRequiredFor, [feat.id])
             .catch((e) => {
                 throw e;
             });
 
-        feat.required_for = featPrereq as IFeatPrereq[];
+        feat.required_for = prereqFor as IFeatPrereq[];
+
+        const featPrereq = await Database.query(getFeatsRequires, [feat.id])
+        .catch((e) => {
+            throw e;
+        });
+
+        feat.requires = featPrereq as IFeatPrereq[];
 
         return feat;
     }
