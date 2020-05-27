@@ -1,5 +1,7 @@
 
 const path = require("path");
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
+const NodemonPlugin = require('nodemon-webpack-plugin'); // Ding
 
 module.exports = {
     pagesPath: path.normalize(path.join(__dirname, "client/src")),
@@ -22,6 +24,10 @@ module.exports = {
             module: {
                 rules: [
                     {
+                        test: /\.vue$/,
+                        loader: 'vue-loader'
+                    },
+                    {
                         test: /\.js$/,
                         loader: "babel-loader",
                         options: {
@@ -29,6 +35,10 @@ module.exports = {
                             presets: ["@babel/preset-env"],
                         },
                     },
+                    {
+                        test: /\.css$/,
+                        use: ['style-loader', 'css-loader']
+                    }
                 ],
             },
         },
@@ -40,4 +50,9 @@ module.exports = {
     head: {
         title: "Test",
     },
+    plugins: [
+        // make sure to include the plugin!
+        new VueLoaderPlugin(),
+        new NodemonPlugin(), // Dong
+    ]
 };

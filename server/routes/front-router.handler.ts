@@ -11,7 +11,7 @@ class FrontEndRouter {
                     title: "TEST",
                 };
 
-                res.renderVue("index.vue", data);
+                res.renderVue("App.vue", data);
             });
         });
 
