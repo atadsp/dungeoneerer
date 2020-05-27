@@ -1,6 +1,8 @@
 import * as bodyParser from "body-parser";
 import express from "express";
+import path from "path";
 import Feats from "../services/feat-service/feat.service";
+import FrontEndRouter from "./front-router.handler";
 
 class Router {
     public build(): express.Express {
@@ -10,11 +12,11 @@ class Router {
             extended: true
         }));
 
-        app.get("/", (req: any, res: any) => {
-           res.send("base route");
-        });
+        app.use(express.static(path.join(__dirname, "../client/public")));
 
         app = Feats.NewFeatService(app);
+
+        app = FrontEndRouter.build(app);
 
         return app;
     }

@@ -3,5 +3,7 @@
 /psql/liquibase.properties
 /psql/postgresql-42.2.12.jar
 # Ignores compiled TypeScript files
-**/*.map
-**/*.js
+/server/**/*.map
+/server/**/*.js
+/client/dist/*
+.expressvue/
