@@ -17,7 +17,6 @@
 </script>
 
 <style lang="css">
-    /* @import "../public/styles/bootstrap/css/bootstrap.min.css"; */
     @import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-    @import "../public/styles/App.css";
+    /* @import "../public/styles/App.css"; */
 </style>
