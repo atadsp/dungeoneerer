@@ -1,7 +1,7 @@
 import * as bodyParser from "body-parser";
 import express from "express";
-import Feats from "../services/feat-service/feat.service";
 import path from "path";
+import Feats from "../services/feat-service/feat.service";
 
 class Router {
     public build(): express.Express {
