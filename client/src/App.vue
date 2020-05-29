@@ -1,7 +1,8 @@
 <template>
     <div id="app">
-        <Header></Header>
+        <Nav sitename:sitename></Nav>
         <div class="container-fluid">
+            <p>{{sitename}}</p>
             <h1>"YO"</h1>
             <p>Welcome to the Vue Webpack final installation hopefully maybe I mean it this time demo.</p>
             <div class="row">
@@ -9,17 +10,20 @@
                 <div class="col-sm-6">test</div>
             </div>
         </div>
+        <Footer></Footer>
     </div>
 </template>
 
 
 <script lang="ts">
-import Header from "./components/Header.vue";
+import Nav from "./components/Nav.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
     name: "App",
         components: {
-            Header,
+            Nav,
+            Footer,
     }
 };
 </script>

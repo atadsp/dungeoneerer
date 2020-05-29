@@ -6,7 +6,7 @@
 /**/*.map
 /**/*.js
 /client/dist/*
-.expressvue/
+dev.env.js
 
 #These files are not ignored
 !/client/dist/index.html
