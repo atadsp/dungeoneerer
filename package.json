@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "prebuild": "tslint -c tslint.json -p tsconfig.json --fix",
-    "build": "tsc",
+    "build": "tsc && webpack --mode development",
     "prestart": "npm run build",
     "start": "node server/server.js",
-    "watch": "nodemon"
+    "watch": "nodemon",
+    "update": "ncu -u && npm install"
   },
   "repository": {
     "type": "git",
@@ -28,12 +29,14 @@
     "express": "^4.17.1",
     "jquery": "^3.5.1",
     "pg": "^8.2.1",
-    "typescript": "^3.9.3",
+    "popper.js": "^1.16.1",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
-    "vue-router": "^3.2.0"
+    "vue-router": "^3.3.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.10.1",
+    "@babel/preset-env": "^7.10.1",
     "@types/body-parser": "^1.19.0",
     "@types/bootstrap": "^4.5.0",
     "@types/dotenv": "^8.2.0",
@@ -41,14 +44,30 @@
     "@types/jquery": "^3.3.38",
     "@types/node": "^14.0.5",
     "@types/pg": "^7.14.3",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.5.3",
     "eslint": "^7.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "file-loader": "^6.0.0",
     "nodemon": "^2.0.4",
-    "ts-node": "^8.10.1",
-    "tslint": "^6.1.2"
+    "sass": "^1.26.7",
+    "sass-loader": "^8.0.2",
+    "style-loader": "^1.2.1",
+    "ts-loader": "^7.0.5",
+    "ts-node": "^8.10.2",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.3",
+    "vue-loader": "^15.9.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.11",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0"
   },
   "nodemonConfig": {
     "ignore": [
+      "**/*.bundle.js",
       "**/*.test.ts",
       "**/*.spec.ts",
       ".git",
@@ -58,7 +77,7 @@
       "server",
       "client"
     ],
-    "exec": "rm -rf .expressvue && npm start",
+    "exec": "npm start",
     "ext": "ts vue css scss"
   }
 }

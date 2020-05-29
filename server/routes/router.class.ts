@@ -15,11 +15,10 @@ class Router {
         app = Feats.NewFeatService(app);
 
 
-        app.use(express.static(path.resolve(__dirname + "../../../client/src/")));
-        app.use(express.static(path.resolve(__dirname + "../../../client/public/")));
+        app.use(express.static(path.resolve(__dirname + "../../../client/dist/")));
 
         app.get("/", (req, res)=>{
-          res.sendFile( path.resolve(__dirname + '../../../client/src/index.html') );
+          res.sendFile( path.resolve(__dirname + '../../../client/dist/index.html') );
         })
 
         return app;

@@ -1,35 +1,28 @@
 <template>
-    <html lang="en">
+    <div id="app">
         <Header></Header>
         <div class="container-fluid">
-            <h1>{{$root.title}}</h1>
-            <p>Welcome to the {{$root.title}} demo.</p>
+            <h1>"YO"</h1>
+            <p>Welcome to the Vue Webpack final installation hopefully maybe I mean it this time demo.</p>
             <div class="row">
                 <div class="col-sm-6">test</div>
                 <div class="col-sm-6">test</div>
             </div>
         </div>
-    </html>
+    </div>
 </template>
 
 
-<script>
-import Main from "./main";
-import Header from "./components/Header";
+<script lang="ts">
+import Header from "./components/Header.vue";
 
 export default {
-    mixins: [Main],
-    data: function () {
-        return {
-        }
-    },
-    components: {
-        Header
+    name: "App",
+        components: {
+            Header,
     }
-}
+};
 </script>
 
 <style lang="css">
-    @import '../../node_modules/bootstrap/dist/css/bootstrap.min.css';
-    @import "../public/styles/App.css";
 </style>
