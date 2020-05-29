@@ -13,10 +13,11 @@ const data = {
     sitename
 }
 
+
 new Vue({
-    data:{
-        sitename,
-    },
     render: h => h(App, {
+        props: {
+            sitename
+        }
     })
 }).$mount("#app");
