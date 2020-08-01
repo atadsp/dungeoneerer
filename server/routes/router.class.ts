@@ -2,11 +2,13 @@ import * as bodyParser from "body-parser";
 import express from "express";
 import path from "path";
 import Feats from "../services/feat-service/feat.service";
+import compression from 'compression';
 
 class Router {
     public build(): express.Express {
         let app = express();
 
+        app.use(compression({}));
         app.use(bodyParser.json());
         app.use(bodyParser.urlencoded({
             extended: true
