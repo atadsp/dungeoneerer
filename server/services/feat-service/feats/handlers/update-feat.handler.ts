@@ -1,6 +1,6 @@
-import Database from "../../database/database.class";
-import Utility from "../../services/utility.class";
-import { IFeat } from "./feat.interface";
+import Database from "../../../../database/database.class";
+import Utility from "../../../../services/utility.class";
+import { IFeat } from "../../models/feat.interface";
 import GetFeat from "./get-feat.handler";
 
 class UpdateFeat {
@@ -19,7 +19,7 @@ class UpdateFeat {
 
         valArry.push(featId);
 
-        const query = Utility.generateUpdateQuery("feats", keyArry);
+        const query = Utility.generateUpdateQuery("feats", "feats", keyArry);
 
         console.log(feat);
         console.log(query);

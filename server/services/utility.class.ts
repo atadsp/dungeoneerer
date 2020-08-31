@@ -1,6 +1,6 @@
 class Utility {
-    public generateUpdateQuery = (table: string, cols: string[]): string => {
-        let query = `UPDATE dungeoneerer.${table} SET`;
+    public generateUpdateQuery = (schema: string, table: string, cols: string[]): string => {
+        let query = `UPDATE ${schema}.${table} SET`;
 
         let i = 1;
         cols.forEach((element) => {

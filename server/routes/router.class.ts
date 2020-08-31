@@ -1,7 +1,7 @@
 import * as bodyParser from "body-parser";
 import express from "express";
 import path from "path";
-import Feats from "../services/feat-service/feat.service";
+import FeatsService from "../services/feat-service/feat.service";
 import compression from 'compression';
 
 class Router {
@@ -14,7 +14,7 @@ class Router {
             extended: true
         }));
 
-        app = Feats.NewFeatService(app);
+        app = FeatsService.NewFeatService(app);
 
 
         app.use(express.static(path.resolve(__dirname + "../../../client/dist/")));

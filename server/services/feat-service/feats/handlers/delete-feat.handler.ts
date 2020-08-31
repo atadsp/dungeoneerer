@@ -1,4 +1,4 @@
-import Database from "../../database/database.class";
+import Database from "../../../../database/database.class";
 
 const deleteFeatQuery = `
 DELETE FROM feats.feats

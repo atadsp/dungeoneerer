@@ -30,9 +30,7 @@
     "express": "^4.17.1",
     "jquery": "^3.5.1",
     "pg": "^8.3.0",
-    "pg-hstore": "^2.3.3",
     "popper.js": "^1.16.1",
-    "sequelize": "^6.3.4",
     "vue": "^2.6.11",
     "vue-axios": "^2.1.5",
     "vue-router": "^3.3.4"

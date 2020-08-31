@@ -1,6 +1,6 @@
-import Database from "../../database/database.class";
-import { IFeatPrereq } from "../feat-prereq-service/feat-prereq.interface";
-import { IFeat } from "./feat.interface";
+import Database from "../../../../database/database.class";
+import { IFeatPrereq } from "../../models/feat-prereq.interface";
+import { IFeat } from "../../models/feat.interface";
 
 const getFeatQuery = `
 SELECT fn.short_description, fn.name, f.name as feat_name, f.type, f.categories, f.prerequisites, f.game_effects, f.description, f.benefit,

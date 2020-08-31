@@ -1,5 +1,5 @@
-import Database from "../../database/database.class";
-import { IFeat } from "./feat.interface";
+import Database from "../../../../database/database.class";
+import { IFeat } from "../../models/feat.interface";
 
 const insertFeatQuery = `
 INSERT INTO feats.feats

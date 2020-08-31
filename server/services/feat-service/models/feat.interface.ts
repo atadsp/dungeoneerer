@@ -1,4 +1,4 @@
-import { IFeatPrereq } from "../feat-prereq-service/feat-prereq.interface";
+import { IFeatPrereq } from "./feat-prereq.interface";
 
 export interface IFeat {
     short_description: string;
