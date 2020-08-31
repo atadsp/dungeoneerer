@@ -1,4 +1,5 @@
 import Database from "../../../../database/database.class";
+import GetFeatPrereq from "../../feat_prerequisites/handlers/get-feat-prerequisite.handler"
 import { IFeatPrereq } from "../../models/feat-prereq.interface";
 import { IFeat } from "../../models/feat.interface";
 
@@ -14,26 +15,6 @@ LEFT JOIN versions.books as b
 ON fi.book_id = b.id
 LEFT JOIN versions.versions as v
 ON b.version_id = v.id
-`;
-
-const getFeatsRequiredFor = `
-SELECT fn.name, fn.short_description, fp.prerequisite_feat_id
-FROM feats.feat_prerequisites as fp
-LEFT JOIN feats.feat_index as fi
-ON fi.feat_id = fp.prerequisite_feat_id
-LEFT JOIN feats.feat_names as fn
-ON fn.id=fi.feat_name_id
-WHERE fp.feat_id=$1;
-`;
-
-const getFeatsRequires = `
-SELECT fn.name, fn.short_description, fp.feat_id
-FROM feats.feat_prerequisites as fp
-LEFT JOIN feats.feat_index as fi
-ON fi.feat_id = fp.feat_id
-LEFT JOIN feats.feat_names as fn
-ON fn.id=fi.feat_name_id
-WHERE fp.prerequisite_feat_id=$1;
 `;
 
 class GetFeat {
@@ -61,19 +42,8 @@ class GetFeat {
 
         const feat = results[0] as IFeat;
 
-        const prereqFor = await Database.query(getFeatsRequiredFor, [feat.id])
-            .catch((e) => {
-                throw e;
-            });
-
-        feat.required_for = prereqFor as IFeatPrereq[];
-
-        const featPrereq = await Database.query(getFeatsRequires, [feat.id])
-        .catch((e) => {
-            throw e;
-        });
-
-        feat.requires = featPrereq as IFeatPrereq[];
+        feat.required_for = await GetFeatPrereq.getFeatPrereqRequiredFor(feat.id);
+        feat.requires = await GetFeatPrereq.getFeatPrereqRequires(feat.id);
 
         return feat;
     }
