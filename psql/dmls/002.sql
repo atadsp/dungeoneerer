@@ -1,12 +1,12 @@
-INSERT INTO dungeoneerer.books(
+INSERT INTO versions.books(
 	name, version_id)
-	VALUES ('Players Handbook', (SELECT id FROM dungeoneerer.versions WHERE name = 'Pathfinder')), ('Players Handbook', (SELECT id FROM dungeoneerer.versions WHERE name = 'D&D 3.5'));
+	VALUES ('Players Handbook', (SELECT id FROM versions.versions WHERE name = 'Pathfinder')), ('Players Handbook', (SELECT id FROM versions.versions WHERE name = 'D&D 3.5'));
 
-INSERT INTO dungeoneerer.feat_names(
+INSERT INTO feats.feat_names(
 	short_description, name)
 	VALUES ('blah', 'weapon_focus'), ('blah', 'weapon_specialization');
 
-INSERT INTO dungeoneerer.feats(
+INSERT INTO feats.feats(
 	name, type, categories, prerequisites, game_effects, description, benefit, special)
 	VALUES  ('Weapon Focus', true, '["Combat"]',
                 '[{"prerequisite": "Proficiency with selected weapon","proficency": {"weapon": "type"}},{"prerequisite": "base attack bonus +1","baseAttackBonus": 1}]',

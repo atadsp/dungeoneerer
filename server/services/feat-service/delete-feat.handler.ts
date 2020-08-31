@@ -1,7 +1,7 @@
 import Database from "../../database/database.class";
 
 const deleteFeatQuery = `
-DELETE FROM dungeoneerer.feats
+DELETE FROM feats.feats
 WHERE feat_id = $1;
 `;
 

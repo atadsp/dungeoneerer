@@ -2,14 +2,14 @@ import Database from "../../database/database.class";
 import { IFeat } from "./feat.interface";
 
 const insertFeatQuery = `
-INSERT INTO dungeoneerer.feats
+INSERT INTO feats.feats
 (name, type, categories, prerequisites, game_effects, description, benefit, special, normal)
 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
 RETURNING id
 `;
 
 const insertFeatName = `
-INSERT INTO dungeoneerer.feat_names
+INSERT INTO feats.feat_names
 (name, short_description)
 VALUES ($1, $2)
 ON CONFLICT(name) DO UPDATE SET name = EXCLUDED.name
@@ -17,13 +17,13 @@ RETURNING id;
 `;
 
 const insertFeatIndex = `
-INSERT INTO dungeoneerer.feat_index
+INSERT INTO feats.feat_index
 (feat_id, feat_name_id, book_id, page_number)
 VALUES ($1, $2, $3, $4)
 `;
 
 const insertIntoFeatPrereq = `
-INSERT INTO dungeoneerer.feat_prerequisites
+INSERT INTO feats.feat_prerequisites
 (feat_id, prerequisite_feat_id)
 VALUES ($1, $2)
 `;
