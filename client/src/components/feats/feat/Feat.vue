@@ -9,39 +9,26 @@
             <p>{{ error }}</p>
         </div>
 
-        <div v-if="feats" class="content">
-            <h2>Feats</h2>
-            <table class="table table-bordered table-hover">
-                <thead class="thead-light">
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Short Description</th>
-                        <th scope="col">Rulebook</th>
-                        <th scope="col">Game Version</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="feat in feats" :key="feat.id">
-                        <td>{{feat.feat_name}}</td>
-                        <td>{{feat.short_description}}</td>
-                        <td>{{feat.book_name}}</td>
-                        <td>{{feat.version_name}}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div v-if="feat" class="content">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h2>Feat</h2>
+                    <p>{{feat}}</p>
+                </div>
+            </div>
         </div>
     </div>
   </div>
 </template>
 
 <script>
-import {FeatsAPI} from "./feats"
+import {FeatAPI} from "./feat.api"
 
 export default {
     data() {
         return {
             loading: false,
-            feats: null,
+            feat: null,
             error: null
         }
     },
@@ -58,9 +45,9 @@ export default {
         fetchData() {
             this.error = this.post = null
             this.loading = true
-            FeatsAPI.getFeats()
+            FeatAPI.getFeat(this.$route.params.id)
                 .then((response)=>{
-                    this.feats = response.data;
+                    this.feat = response.data;
                     this.loading = false
                 })
                 .catch((e)=>{
@@ -68,7 +55,7 @@ export default {
                 })
         }
     },
-    props: ['Feats']
+    props: ['Feat']
 }
 </script>
 

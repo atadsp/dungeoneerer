@@ -1,7 +1,13 @@
 <template>
     <div id="app">
         <Nav v-bind:sitename="sitename"></Nav>
-        <router-view></router-view>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12">
+                    <router-view></router-view>
+                </div>
+            </div>
+        </div>
         <Footer></Footer>
     </div>
 </template>
