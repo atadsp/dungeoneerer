@@ -1,5 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 import 'bootstrap';
 import './styles/main.scss'
@@ -18,12 +20,13 @@ const data = {
 
 const router = new VueRouter({
     routes: [
-        { path: '/', component: Home },
-        { path: '/feats', component: Feats }
+        { path: '/', component: Home, name: "Home" },
+        { path: '/feats', component: Feats, name: "Feats" }
     ]
 })
 
 Vue.use(VueRouter);
+Vue.use(VueAxios, axios);
 
 new Vue({
     router,
