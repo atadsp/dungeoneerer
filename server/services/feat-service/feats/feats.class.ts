@@ -18,6 +18,16 @@ class Feats {
             res.send(resp);
         });
 
+        app.get("/api/v1/feats_by_index", async (req: any, res: any) => {
+            const resp = await GetFeat.getFeatsByIndex()
+                .catch((e) => {
+                    res.status(400).send(e);
+                    return;
+                });
+
+            res.send(resp);
+        });
+
         app.get("/api/v1/feats/:id", async (req: any, res: any) => {
             if (!req.params.id) {
                 res.status("No ID provided").send(400);

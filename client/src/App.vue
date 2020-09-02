@@ -23,7 +23,7 @@ export default {
             Nav,
             Footer,
         },
-        props:['sitename']
+    props:['sitename']
 };
 </script>
 

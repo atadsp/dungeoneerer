@@ -16,16 +16,24 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Short Description</th>
-                        <th scope="col">Rulebook</th>
-                        <th scope="col">Game Version</th>
+                        <th scope="col">Rulebooks</th>
+                        <th scope="col">Game Versions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="feat in feats" :key="feat.id" v-on:click="goToFeat(feat.id)">
+                    <tr v-for="feat in feats" :key="feat.feat_name_id" v-on:click="goToFeat(feat.feat_ids[0])"  class="clickable">
                         <td>{{feat.feat_name}}</td>
                         <td>{{feat.short_description}}</td>
-                        <td>{{feat.book_name}}</td>
-                        <td>{{feat.version_name}}</td>
+                        <td>
+                            <span v-for="(val,index) of feat.book_names" :key="val">
+                                {{val}}<span v-if="index != Object.keys(feat.book_names).length - 1">, </span>
+                            </span>
+                        </td>
+                        <td>
+                            <span v-for="(val,index) of feat.version_names" :key="val">
+                                {{val}}<span v-if="index != Object.keys(feat.version_names).length - 1">, </span>
+                            </span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
