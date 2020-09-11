@@ -4,6 +4,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
+                    <br>
                     <router-view></router-view>
                 </div>
             </div>

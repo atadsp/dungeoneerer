@@ -43,6 +43,22 @@ class Feats {
             res.send(resp);
         });
 
+        app.get("/api/v1/feats/:id/related", async (req: any, res: any) => {
+            if (!req.params.id) {
+                res.status("No ID provided").send(400);
+                return;
+            }
+
+            const resp = await GetFeat.getReleatedFeats(req.params.id)
+                .catch((e) => {
+                    res.status(400).send(e);
+                    return;
+                });
+
+            res.send(resp);
+        });
+
+
         app.post("/api/v1/feats", async (req: any, res: any) => {
 
             const resp = await InsertFeat.insertFeat(req.body as IFeat)
