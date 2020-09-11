@@ -17,18 +17,44 @@
                             <h2>{{feat.feat_name}}</h2>
                         </div>
                         <div class="card-body">
-                            <span v-if="relatedFeats && relatedFeats.same_feat && relatedFeats.same_feat.length > 0">
-                                <div class="row">
+                            <span v-if="relatedFeats && relatedFeats.requires && relatedFeats.requires.length > 0">
+                                <div class="row related-feat-bloc">
                                     <div class="col-sm-12">
-                                        <h5>Other Versions:</h5>
-                                        <span v-for="sf in relatedFeats.same_feat" :key="sf.feat_id">
-                                            {{sf}}
+                                        <h6>Prerequisite:</h6>
+                                        <span v-for="(val,index) of relatedFeats.requires" :key="val">
+                                            <a v-bind:href="'/#/feats/' + val.feat_id">{{val.feat_name}}</a><span v-if="index != Object.keys(relatedFeats.requires).length - 1">, </span>
                                         </span>
                                     </div>
                                 </div>
                             </span>
-                            <br>
-                            <p class="card-text">{{feat}}</p>
+
+                            <div class="row related-feat-bloc">
+                                <div class="col-sm-12">
+                                    <p class="card-text">{{feat}}</p>
+                                </div>
+                            </div>
+
+                            <span v-if="relatedFeats && relatedFeats.required_for && relatedFeats.required_for.length > 0">
+                                <div class="row related-feat-bloc">
+                                    <div class="col-sm-12">
+                                        <h6>Required For:</h6>
+                                        <span v-for="(val,index) of relatedFeats.required_for" :key="val">
+                                            <a v-bind:href="'/#/feats/' + val.feat_id">{{val.feat_name}}</a><span v-if="index != Object.keys(relatedFeats.required_for).length - 1">, </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </span>
+
+                            <span v-if="relatedFeats && relatedFeats.same_feat && relatedFeats.same_feat.length > 0">
+                                <div class="row related-feat-bloc">
+                                    <div class="col-sm-12">
+                                        <h6>Other Versions:</h6>
+                                        <span v-for="(val,index) of relatedFeats.same_feat" :key="val">
+                                            <a v-bind:href="'/#/feats/' + val.feat_id">{{val.version_name}}: {{val.book_name}}</a><span v-if="index != Object.keys(relatedFeats.same_feat).length - 1">, </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </span>
                         </div>
                     </div>
                 </div>

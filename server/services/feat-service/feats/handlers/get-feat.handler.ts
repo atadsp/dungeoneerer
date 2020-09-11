@@ -67,29 +67,21 @@ FROM feats.feat_index as fi
     ORDER BY feat_name`;
 
 const getRequiresFeatsQuery = `
-SELECT fp.prerequisite_feat_id as feat_id, f.name as feat_name, v.id as version_id, v.name as version_name, b.id as book_id, b.name as book_name
+SELECT fp.prerequisite_feat_id as feat_id, f.name as feat_name
 FROM feats.feat_prerequisites as fp
     LEFT JOIN feats.feat_index as fi
         ON fi.feat_id = fp.feat_id
     LEFT JOIN feats.feats as f
         on fp.prerequisite_feat_id = f.id
-    LEFT JOIN versions.books as b
-        on fi.book_id = b.id
-    LEFT JOIN versions.versions as v
-        on b.version_id = v.id
     WHERE fp.feat_id = $1`
 
 const getPreqrequisiteFeatsQuery = `
-SELECT fp.feat_id as feat_id, f.name as feat_name, v.id as version_id, v.name as version_name, b.id as book_id, b.name as book_name
+SELECT fp.feat_id as feat_id, f.name as feat_name
 FROM feats.feat_prerequisites as fp
     LEFT JOIN feats.feat_index as fi
         ON fi.feat_id = fp.feat_id
     LEFT JOIN feats.feats as f
         on fp.feat_id = f.id
-    LEFT JOIN versions.books as b
-        on fi.book_id = b.id
-    LEFT JOIN versions.versions as v
-        on b.version_id = v.id
     WHERE fp.prerequisite_feat_id = $1`
 
 class GetFeat {
@@ -136,7 +128,7 @@ class GetFeat {
     }
 
     public async getReleatedFeats(id :any): Promise <IFeatRelated>{
-        console.log("Getting Realted Feats for: ", id);
+        console.log("Getting Related Feats for: ", id);
 
         const relatedFeats = {} as IFeatRelated;
 
@@ -152,14 +144,14 @@ class GetFeat {
                 throw e;
             });
 
-        const results3 = await Database.query(getRequiresFeatsQuery, parameters)
+        const results3 = await Database.query(getPreqrequisiteFeatsQuery, parameters)
             .catch((e) => {
                 throw e;
             });
 
         relatedFeats.same_feat = results1 as IFeat[];
-        relatedFeats.requires = results2 as IFeat[];
-        relatedFeats.required_for = results3 as IFeat[];
+        relatedFeats.required_for = results2 as IFeat[];
+        relatedFeats.requires = results3 as IFeat[];
 
         return relatedFeats;
     }
