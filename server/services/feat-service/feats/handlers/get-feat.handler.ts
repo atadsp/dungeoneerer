@@ -5,7 +5,7 @@ import { IFeat } from "../../models/feat.interface";
 import { IFeatRelated } from "../../models/feat-related.interface";
 
 const getFeatQuery = `
-SELECT fn.short_description, fn.name, f.name as feat_name, f.type, f.categories, f.prerequisites, f.game_effects, f.description, f.benefit,
+SELECT fn.short_description, fn.name, f.name as feat_name, f.type, f.prerequisites, f.game_effects, f.description, f.benefit,
     f.special, f.normal, f.id as id, fn.id as feat_name_id, b.name as book_name, fi.page_number, b.id as book_id, v.name as version_name, v.id as version_id
 FROM feats.feat_index as fi
     LEFT JOIN feats.feat_names as fn
@@ -34,7 +34,7 @@ FROM feats.feat_index as fi
 const getFeatByIDQuery = `
 SELECT
     fn.short_description, fn.name,
-    f.name as feat_name, f.type, f.categories, f.prerequisites, f.game_effects, f.description, f.benefit, f.special, f.normal, f.id as id, fn.id as feat_name_id,
+    f.name as feat_name, f.type, f.prerequisites, f.game_effects, f.description, f.benefit, f.special, f.normal, f.id as id, fn.id as feat_name_id,
     fi.page_number, b.name as book_name, b.id as book_id, v.name as version_name, v.id as version_id
 FROM feats.feat_index as fi
 	LEFT JOIN feats.feat_names as fn
@@ -46,7 +46,7 @@ FROM feats.feat_index as fi
 	LEFT JOIN versions.versions as v
 		ON b.version_id = v.id
 	WHERE f.id=$1
-	GROUP BY fn.short_description, fn.name, f.name, f.type, f.categories, f.prerequisites, f.game_effects, f.description, f.benefit,
+	GROUP BY fn.short_description, fn.name, f.name, f.type, f.prerequisites, f.game_effects, f.description, f.benefit,
 f.special, f.normal, f.id, fn.id, b.name, fi.page_number, b.id, v.name, v.id`
 
 const getFeatsByIndexQuery = `
@@ -83,6 +83,13 @@ FROM feats.feat_prerequisites as fp
     LEFT JOIN feats.feats as f
         on fp.feat_id = f.id
     WHERE fp.prerequisite_feat_id = $1`
+
+const getFeatsCategoriesQuery = `
+SELECT *
+FROM feats.feat_categories as fc
+    LEFT JOIN feats.feat_category_index as fci
+        ON fc.id = fci.feat_category_id
+    WHERE fci.feat_id =$1`
 
 class GetFeat {
     public async getFeat(): Promise < IFeat[] > {
@@ -155,6 +162,19 @@ class GetFeat {
 
         return relatedFeats;
     }
+
+    public async getFeatCategories(id: any): Promise < IFeat[] > {
+        console.log("Getting Feat Categories: ", id);
+
+        const parameters = [id];
+        const results = await Database.query(getFeatsCategoriesQuery, parameters)
+            .catch((e) => {
+                throw e;
+            });
+
+        return results as IFeat[];
+    }
+
 }
 
 export default new GetFeat();

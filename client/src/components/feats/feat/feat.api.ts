@@ -14,4 +14,11 @@ export const FeatAPI ={
                 throw e;
             });
     },
+
+    async getFeatCategories(id: string): Promise<any> {
+        return await axios.get(`/api/v1/feats/${id}/categories`)
+            .catch((e) => {
+                throw e;
+            });
+    },
 }

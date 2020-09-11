@@ -28,6 +28,18 @@
                                 </div>
                             </span>
 
+                            <span v-if="featCategories && featCategories.length > 0">
+                                <div class="row related-feat-bloc">
+                                    <div class="col-sm-12">
+                                        <h6>Categories:</h6>
+                                        <span v-for="(val,index) of featCategories" :key="val">
+                                            <!-- <a v-bind:href="'/#/feats/' + val.feat_id">{{val.feat_name}}</a><span v-if="index != Object.keys(featCategories).length - 1">, </span> -->
+                                            <span>{{val.name}}</span><span v-if="index != Object.keys(featCategories).length - 1">, </span>
+                                        </span>
+                                    </div>
+                                </div>
+                            </span>
+
                             <div class="row related-feat-bloc">
                                 <div class="col-sm-12">
                                     <p class="card-text">{{feat}}</p>
@@ -73,6 +85,7 @@ export default {
             loading: false,
             feat: null,
             relatedFeats: null,
+            featCategories: null,
             error: null
         }
     },
@@ -96,6 +109,10 @@ export default {
                     FeatAPI.getRealtedFeats(this.$route.params.id)
                         .then((response=>{
                             this.relatedFeats = response.data
+                        }))
+                    FeatAPI.getFeatCategories(this.$route.params.id)
+                        .then((response=>{
+                            this.featCategories = response.data
                         }))
                 })
                 .catch((e)=>{
