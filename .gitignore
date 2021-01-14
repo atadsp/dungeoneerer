@@ -2,6 +2,7 @@
 .env
 /psql/liquibase.properties
 /psql/postgresql-42.2.12.jar
+
 # Ignores compiled TypeScript files
 /**/*.map
 /**/*.js
@@ -10,3 +11,4 @@ dev.env.js
 
 #These files are not ignored
 !/client/dist/index.html
+!webpack.config.js

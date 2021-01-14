@@ -18,7 +18,7 @@
                         </div>
                         <div class="card-body">
                             <span v-if="relatedFeats && relatedFeats.requires && relatedFeats.requires.length > 0">
-                                <div class="row related-feat-bloc">
+                                <div class="row feat-row">
                                     <div class="col-sm-12">
                                         <h6>Prerequisite:</h6>
                                         <span v-for="(val,index) of relatedFeats.requires" :key="val">
@@ -29,7 +29,7 @@
                             </span>
 
                             <span v-if="featCategories && featCategories.length > 0">
-                                <div class="row related-feat-bloc">
+                                <div class="row feat-row">
                                     <div class="col-sm-12">
                                         <h6>Categories:</h6>
                                         <span v-for="(val,index) of featCategories" :key="val">
@@ -40,14 +40,33 @@
                                 </div>
                             </span>
 
-                            <div class="row related-feat-bloc">
+                            <div class="row feat-row">
                                 <div class="col-sm-12">
-                                    <p class="card-text">{{feat}}</p>
+                                    <h5>Benefit</h5>
+                                    <p class="card-text">{{feat.description}}</p>
                                 </div>
                             </div>
 
+                            <span v-if="feat.special">
+                                <div class="row feat-row">
+                                    <div class="col-sm-12">
+                                        <h5>Special</h5>
+                                        <p class="card-text">{{feat.special}}</p>
+                                    </div>
+                                </div>
+                            </span>
+
+                            <span v-if="feat.normal">
+                                <div class="row feat-row">
+                                    <div class="col-sm-12">
+                                        <h5>Normal</h5>
+                                        <p class="card-text">{{feat.normal}}</p>
+                                    </div>
+                                </div>
+                            </span>
+
                             <span v-if="relatedFeats && relatedFeats.required_for && relatedFeats.required_for.length > 0">
-                                <div class="row related-feat-bloc">
+                                <div class="row feat-row">
                                     <div class="col-sm-12">
                                         <h6>Required For:</h6>
                                         <span v-for="(val,index) of relatedFeats.required_for" :key="val">
@@ -58,7 +77,7 @@
                             </span>
 
                             <span v-if="relatedFeats && relatedFeats.same_feat && relatedFeats.same_feat.length > 0">
-                                <div class="row related-feat-bloc">
+                                <div class="row feat-row">
                                     <div class="col-sm-12">
                                         <h6>Other Versions:</h6>
                                         <span v-for="(val,index) of relatedFeats.same_feat" :key="val">
