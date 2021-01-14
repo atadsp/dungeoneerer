@@ -15,14 +15,12 @@
 
 
 <script lang="ts">
-import Nav from "./components/Nav.vue";
-import Footer from "./components/Footer.vue";
 
 export default {
     name: "App",
         components: {
-            Nav,
-            Footer,
+            Nav: () => import("./components/Nav.vue"),
+            Footer: () => import("./components/Footer.vue"),
         },
     props:['sitename']
 };

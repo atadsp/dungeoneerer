@@ -3,6 +3,9 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const Dotenv = require('dotenv-webpack');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 const CompressionPlugin = require('compression-webpack-plugin');
+const Config = require('webpack-chain');
+
+const config = new Config();
 
 module.exports = {
     entry: [
@@ -10,13 +13,16 @@ module.exports = {
         './client/src/app.js',
     ],
     output: {
-        filename: '[name].bundle.js',
-        path: path.resolve(__dirname, 'client/dist')
+        filename: '[name].js',
+        path: path.resolve(__dirname, 'client/dist'),
     },
     module: {
         rules: [{
                 test: /\.vue$/,
-                loader: 'vue-loader'
+                loader: 'vue-loader',
+                options:{
+
+                }
             },
             {
                 test: /\.js$/,
@@ -55,7 +61,7 @@ module.exports = {
         new MinifyPlugin(),
         new CompressionPlugin({
             algorithm: 'gzip',
-            filename: '[path].gz[query]',
+            filename: '[name].gz[query]',
           })
     ],
 };

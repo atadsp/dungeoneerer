@@ -87,7 +87,6 @@ class Feats {
         app.patch("/api/v1/feats/:id", async (req: any, res: any) => {
             console.log("Patching", req.params.id);
             if (!req.params.id) {
-                console.log("test1");
                 res.status("No ID provided").send(400);
                 return;
             }

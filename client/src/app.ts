@@ -8,11 +8,6 @@ import './styles/main.scss'
 
 import App from "./App.vue";
 
-import Home from "./components/Home.vue";
-import Feats from "./components/feats/feats/Feats.vue";
-import Feat from "./components/feats/feat/Feat.vue";
-
-
 const sitename = process.env.SITENAME;
 
 const data = {
@@ -21,9 +16,9 @@ const data = {
 
 const router = new VueRouter({
     routes: [
-        { path: '/', component: Home, name: "Home" },
-        { path: '/feats', component: Feats, name: "Feats" },
-        { path: '/feats/:id', component: Feat, name: "Feat" }
+        { path: '/', component: () => import("./components/Home.vue"), name: "Home" },
+        { path: '/feats', component: () => import("./components/feats/feats/Feats.vue"), name: "Feats" },
+        { path: '/feats/:id', component: () => import("./components/feats/feat/Feat.vue"), name: "Feat" }
     ]
 })
 

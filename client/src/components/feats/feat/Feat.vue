@@ -1,3 +1,4 @@
+  
 <template>
   <div class="row">
       <div class="col-sm-12">
@@ -21,7 +22,7 @@
                                 <div class="row feat-row">
                                     <div class="col-sm-12">
                                         <h6>Prerequisite:</h6>
-                                        <span v-for="(val,index) of relatedFeats.requires" :key="val">
+                                        <span v-for="(val,index) in relatedFeats.requires" >
                                             <a v-bind:href="'/#/feats/' + val.feat_id">{{val.feat_name}}</a><span v-if="index != Object.keys(relatedFeats.requires).length - 1">, </span>
                                         </span>
                                     </div>
@@ -32,7 +33,7 @@
                                 <div class="row feat-row">
                                     <div class="col-sm-12">
                                         <h6>Categories:</h6>
-                                        <span v-for="(val,index) of featCategories" :key="val">
+                                        <span v-for="(val,index) in featCategories">
                                             <!-- <a v-bind:href="'/#/feats/' + val.feat_id">{{val.feat_name}}</a><span v-if="index != Object.keys(featCategories).length - 1">, </span> -->
                                             <span>{{val.name}}</span><span v-if="index != Object.keys(featCategories).length - 1">, </span>
                                         </span>
@@ -69,7 +70,7 @@
                                 <div class="row feat-row">
                                     <div class="col-sm-12">
                                         <h6>Required For:</h6>
-                                        <span v-for="(val,index) of relatedFeats.required_for" :key="val">
+                                        <span v-for="(val,index) in relatedFeats.required_for">
                                             <a v-bind:href="'/#/feats/' + val.feat_id">{{val.feat_name}}</a><span v-if="index != Object.keys(relatedFeats.required_for).length - 1">, </span>
                                         </span>
                                     </div>
@@ -80,7 +81,7 @@
                                 <div class="row feat-row">
                                     <div class="col-sm-12">
                                         <h6>Other Versions:</h6>
-                                        <span v-for="(val,index) of relatedFeats.same_feat" :key="val">
+                                        <span v-for="(val,index) in relatedFeats.same_feat">
                                             <a v-bind:href="'/#/feats/' + val.feat_id">{{val.version_name}}: {{val.book_name}}</a><span v-if="index != Object.keys(relatedFeats.same_feat).length - 1">, </span>
                                         </span>
                                     </div>
@@ -97,7 +98,6 @@
 
 <script>
 import {FeatAPI} from "./feat.api"
-
 export default {
     data() {
         return {

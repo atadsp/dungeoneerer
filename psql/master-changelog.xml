@@ -13,5 +13,9 @@
     <include file="ddls/feats/001.sql" relativeToChangelogFile="true" />
     <include file="ddls/feats/002.sql" relativeToChangelogFile="true" />
     <include file="dmls/001.sql" relativeToChangelogFile="true" />
+    <include file="ddls/schemas/002.sql" relativeToChangelogFile="true" />
+    <include file="ddls/users/001.sql" relativeToChangelogFile="true" />
+    <include file="dmls/002.sql" relativeToChangelogFile="true" />
+    <include file="ddls/feats/003.sql" relativeToChangelogFile="true" />
 
 </databaseChangeLog>
