@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Nav></Nav>
+        <Nav :sitename="sitename"></Nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
@@ -25,7 +25,9 @@ export default {
             Nav,
             Footer,
         },
-    props:['sitename']
+    props: {
+        sitename: String
+    }
 };
 </script>
 

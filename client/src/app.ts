@@ -10,10 +10,6 @@ import App from "./App.vue";
 
 const sitename = process.env.SITENAME;
 
-const data = {
-    sitename
-}
-
 const routes = [
     { path: '/', component: () => import("./components/Home.vue"), name: "Home" },
     { path: '/feats', component: () => import("./components/feats/feats/Feats.vue"), name: "Feats" },
@@ -25,6 +21,11 @@ const router = createRouter({
     routes
     })
 
-createApp(App)
+const app = createApp(
+    App,
+    {sitename}
+  )
+
+app
     .use(router)
     .mount("#app");
