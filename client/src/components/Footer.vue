@@ -7,9 +7,12 @@
 </template>
 
 <script>
-export default {
-    props: ['Footer']
-}
+  export default {
+    components: {
+    },
+    setup() {
+    },
+  }
 </script>
 
 <style lang="css">

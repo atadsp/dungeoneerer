@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <Nav v-bind:sitename="sitename"></Nav>
+        <Nav></Nav>
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-12">
@@ -16,11 +16,14 @@
 
 <script lang="ts">
 
+import Nav from "./components/Nav.vue";
+import Footer from "./components/Footer.vue";
+
 export default {
     name: "App",
         components: {
-            Nav: () => import("./components/Nav.vue"),
-            Footer: () => import("./components/Footer.vue"),
+            Nav,
+            Footer,
         },
     props:['sitename']
 };

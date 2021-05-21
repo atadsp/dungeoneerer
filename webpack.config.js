@@ -1,5 +1,5 @@
 const path = require('path');
-const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const { VueLoaderPlugin } = require('vue-loader');
 const Dotenv = require('dotenv-webpack');
 const MinifyPlugin = require("babel-minify-webpack-plugin");
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -37,7 +37,6 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    'vue-style-loader',
                     { loader: 'style-loader'},
                     { loader: 'css-loader'},
                     { loader: 'sass-loader'}
