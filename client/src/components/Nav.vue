@@ -1,7 +1,15 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light dragon-blue">
-    <a class="navbar-brand text-light" href="/">{{sitename}}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <a class="navbar-brand text-light" href="/">{{ sitename }}</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -9,6 +17,9 @@
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
           <a class="nav-link text-light" href="#/feats">Feats</a>
+          <a class="nav-link text-light" href="#/character_generator">
+            Character Generator
+          </a>
         </li>
         <!-- <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -31,16 +42,12 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      sitename: String
-    },
-    components: {
-    },
-    setup() {
-    },
-  }
+export default {
+  props: {
+    sitename: String,
+  },
+  components: {},
+};
 </script>
 
-<style lang="css">
-</style>
+<style lang="css"></style>
