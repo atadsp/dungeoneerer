@@ -1,4 +1,4 @@
 export interface IFeatCategory {
-    id: number;
-    name: string;
+  id: number;
+  name: string;
 }

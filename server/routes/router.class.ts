@@ -2,29 +2,28 @@ import * as bodyParser from "body-parser";
 import express from "express";
 import path from "path";
 import FeatsService from "../services/feat-service/feat.service";
-import compression from 'compression';
+import compression from "compression";
 
 class Router {
-    public build(): express.Express {
-        let app = express();
+  public build(): express.Express {
+    let app = express();
 
-        app.use(compression({}));
-        app.use(bodyParser.json());
-        app.use(bodyParser.urlencoded({
-            extended: true
-        }));
+    app.use(compression({},),);
+    app.use(bodyParser.json(),);
+    app.use(bodyParser.urlencoded({
+      extended: true,
+    },),);
 
-        app = FeatsService.NewFeatService(app);
+    app = FeatsService.NewFeatService(app,);
 
+    app.use(express.static(path.resolve(__dirname + "../../../client/dist/",),),);
 
-        app.use(express.static(path.resolve(__dirname + "../../../client/dist/")));
+    app.get("/", (req, res,) => {
+      res.sendFile(path.resolve(__dirname + "../../../client/dist/index.html",),);
+    },);
 
-        app.get("/", (req, res)=>{
-          res.sendFile( path.resolve(__dirname + '../../../client/dist/index.html') );
-        })
-
-        return app;
-    }
+    return app;
+  }
 }
 
 export default new Router();

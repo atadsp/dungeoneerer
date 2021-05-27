@@ -1,19 +1,13 @@
 <template>
-    <!-- Footer -->
-    <footer class="footer">
-        <div></div>
-    </footer>
-    <!-- Footer -->
+  <footer class="footer">
+    <div></div>
+  </footer>
 </template>
 
 <script>
-  export default {
-    components: {
-    },
-    setup() {
-    },
-  }
+export default {
+  components: {},
+};
 </script>
 
-<style lang="css">
-</style>
+<style lang="css"></style>

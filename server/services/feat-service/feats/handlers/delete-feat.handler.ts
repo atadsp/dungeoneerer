@@ -6,16 +6,15 @@ WHERE feat_id = $1;
 `;
 
 class GetFeat {
-    public async deleteFeatById(id: any): Promise < null > {
-        console.log("Deleting Feat: ", id);
+  public async deleteFeatById(id: any,): Promise<null> {
+    console.log("Deleting Feat: ", id,);
 
-        await Database.query(deleteFeatQuery, [id])
-            .catch((e) => {
-                throw e;
-            });
+    await Database.query(deleteFeatQuery, [ id, ],).catch((e,) => {
+      throw e;
+    },);
 
-        return null;
-    }
+    return null;
+  }
 }
 
 export default new GetFeat();

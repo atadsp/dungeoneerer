@@ -1,5 +1,5 @@
 import Database from "../../../../database/database.class";
-import { IFeat } from "../../models/feat.interface";
+import { IFeat, } from "../../models/feat.interface";
 
 const insertFeatQuery = `
 INSERT INTO feats.feats
@@ -29,49 +29,73 @@ VALUES ($1, $2)
 `;
 
 class InsertFeat {
-    public async insertFeat(feat: IFeat): Promise <IFeat> {
-        console.log("Inserting feat");
+  public async insertFeat(feat: IFeat,): Promise<IFeat> {
+    console.log("Inserting feat",);
 
-        const insertFeatParams = [feat.feat_name, feat.type, JSON.stringify(feat.categories),
-            JSON.stringify(feat.prerequisites), JSON.stringify(feat.game_effects), feat.description,
-            feat.benefit, feat.special, feat.normal];
-        const insertFeatResults = await Database.query(insertFeatQuery, insertFeatParams)
-            .catch((e) => {
-                throw e;
-            });
+    const insertFeatParams = [
+      feat.feat_name,
+      feat.type,
+      JSON.stringify(feat.categories,),
+      JSON.stringify(feat.prerequisites,),
+      JSON.stringify(feat.game_effects,),
+      feat.description,
+      feat.benefit,
+      feat.special,
+      feat.normal,
+    ];
+    const insertFeatResults = await Database.query(
+      insertFeatQuery,
+      insertFeatParams,
+    ).catch((e,) => {
+      throw e;
+    },);
 
-        const featId = insertFeatResults[0].id;
+    const featId = insertFeatResults[0].id;
 
-        const insertFeatNameParams = [feat.name, feat.short_description];
-        const insertFeatNameResults = await Database.query(insertFeatName, insertFeatNameParams)
-            .catch((e) => {
-                throw e;
-            });
+    const insertFeatNameParams = [ feat.name, feat.short_description, ];
+    const insertFeatNameResults = await Database.query(
+      insertFeatName,
+      insertFeatNameParams,
+    ).catch((e,) => {
+      throw e;
+    },);
 
-        const featNameId = insertFeatNameResults[0].id;
+    const featNameId = insertFeatNameResults[0].id;
 
-        const insertFeatIndexParam = [featId, featNameId, feat.book_id, feat.page_number];
-        await Database.query(insertFeatIndex, insertFeatIndexParam)
-            .catch((e) => {
-                throw e;
-            });
+    const insertFeatIndexParam = [
+      featId,
+      featNameId,
+      feat.book_id,
+      feat.page_number,
+    ];
+    await Database.query(insertFeatIndex, insertFeatIndexParam,).catch((e,) => {
+      throw e;
+    },);
 
-        if (feat.prerequisites.length > 0) {
-            for (const i in feat.prerequisites) {
-                if ("feat" in feat.prerequisites[i] && "feat_id" in feat.prerequisites[i].feat) {
-                    const insertFeatPrereqParam = [feat.prerequisites[i].feat.feat_id, featId];
-                    await Database.query(insertIntoFeatPrereq, insertFeatPrereqParam)
-                        .catch((e) => {
-                            throw e;
-                        });
-                }
-            }
+    if (feat.prerequisites.length > 0) {
+      for (const i in feat.prerequisites) {
+        if (
+          "feat" in feat.prerequisites[i] &&
+          "feat_id" in feat.prerequisites[i].feat
+        ) {
+          const insertFeatPrereqParam = [
+            feat.prerequisites[i].feat.feat_id,
+            featId,
+          ];
+          await Database.query(
+            insertIntoFeatPrereq,
+            insertFeatPrereqParam,
+          ).catch((e,) => {
+            throw e;
+          },);
         }
-
-        feat.id = featId;
-
-        return feat;
+      }
     }
+
+    feat.id = featId;
+
+    return feat;
+  }
 }
 
 export default new InsertFeat();

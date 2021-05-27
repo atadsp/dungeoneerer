@@ -1,5 +1,5 @@
 import Database from "../../../../database/database.class";
-import { IFeatPrereq } from "../../models/feat-prereq.interface";
+import { IFeatPrereq, } from "../../models/feat-prereq.interface";
 
 const getFeatsRequiredFor = `
 SELECT fn.name, fn.short_description, fp.prerequisite_feat_id
@@ -22,28 +22,27 @@ WHERE fp.prerequisite_feat_id=$1;
 `;
 
 class GetFeatPrereq {
+  public async getFeatPrereqRequiredFor(featId: any,): Promise<IFeatPrereq[]> {
+    console.log("Getting Feat Prerequisites Required For: ", featId,);
 
-    public async getFeatPrereqRequiredFor(featId: any): Promise < IFeatPrereq[] > {
-        console.log("Getting Feat Prerequisites Required For: ", featId);
+    const requiredFor = await Database.query(getFeatsRequiredFor, [
+      featId,
+    ],).catch((e,) => {
+      throw e;
+    },);
 
-        const requiredFor = await Database.query(getFeatsRequiredFor, [featId])
-            .catch((e) => {
-                throw e;
-            });
+    return requiredFor as IFeatPrereq[];
+  }
 
-        return requiredFor as IFeatPrereq[];
-    }
+  public async getFeatPrereqRequires(featId: any,): Promise<IFeatPrereq[]> {
+    console.log("Getting Feat Prerequisites Requires: ", featId,);
 
-    public async getFeatPrereqRequires(featId: any): Promise < IFeatPrereq[] > {
-        console.log("Getting Feat Prerequisites Requires: ", featId);
+    const requiredFor = await Database.query(getFeatsRequires, [ featId, ],).catch((e,) => {
+      throw e;
+    },);
 
-        const requiredFor = await Database.query(getFeatsRequires, [featId])
-            .catch((e) => {
-                throw e;
-            });
-
-        return requiredFor as IFeatPrereq[];
-    }
+    return requiredFor as IFeatPrereq[];
+  }
 }
 
 export default new GetFeatPrereq();
