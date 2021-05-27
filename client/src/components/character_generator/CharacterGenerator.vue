@@ -4,12 +4,11 @@
       <div class="col-sm-12">
         <label for="charName">Enter Character Name</label>
         <br />
-        <input class="name" id="charName" type="text" />
+        <input class="name" id="charName" type="text" v-model="characterName">
         <br />
         <button
-          class="name_submit btn btn-primary"
-          type="submit"
-          value="GENERATE"
+          class="name_submit btn btn-primary" type="submit" value="GENERATE"
+          v-on:click="fetchData()"
         >
           GENERATE
         </button>
@@ -70,13 +69,26 @@
 </template>
 
 <script>
-// Import {FeatAPI} from "./feat.api"
+import {CharacterGeneratorAPI, } from "./character_generator.api";
 export default {
   data() {
     return {};
   },
   watch: {},
-  methods: {},
+  methods: {
+    fetchData() {
+      this.error = null;
+      this.loading = true;
+
+      CharacterGeneratorAPI.generateCharacter(this.characterName || "", )
+        .then((character,) => {
+          console.log(character, );
+        },)
+        .catch((e,) => {
+          this.error = e.toString();
+        },);
+    },
+  },
   props: [ "CharacterGenerator", ],
 };
 </script>

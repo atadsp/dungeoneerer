@@ -20,5 +20,6 @@
     <include file="ddls/schemas/003.sql" relativeToChangelogFile="true" />
     <include file="ddls/character_generator/001.sql" relativeToChangelogFile="true" />
     <include file="ddls/species/001.sql" relativeToChangelogFile="true" />
+    <include file="dmls/003.sql" relativeToChangelogFile="true" />
 
 </databaseChangeLog>

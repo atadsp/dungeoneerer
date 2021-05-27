@@ -2,6 +2,7 @@ import * as bodyParser from "body-parser";
 import express from "express";
 import path from "path";
 import FeatsService from "../services/feat-service/feat.service";
+import CharacterGeneratorService from "../services/character_generator-service/character_generator.service";
 import compression from "compression";
 
 class Router {
@@ -15,6 +16,7 @@ class Router {
     },),);
 
     app = FeatsService.NewFeatService(app,);
+    app = CharacterGeneratorService.NewCharacterGeneratorService(app,);
 
     app.use(express.static(path.resolve(__dirname + "../../../client/dist/",),),);
 
