@@ -1,17 +1,9 @@
---A note on Gender: I want to be as inclusive as possible while also respecting the random character aspect of this project
---I went back and forth on how, or even if I should, address gender in this generator
---I descided in the end to add gender into the project but to be inclusive while doing so
---I hope this does not offend any members of the LGBTQ+ communities as I did this in an effort to be inclusive of all players
---so that they can see themselves represented in the characters that are randomly generated
 INSERT INTO character_generator.random_gender(
 	name, subjective_pronoun, possesive_pronoun, objective_pronoun, reflexive_pronoun)
 	VALUES 
     ('Non-Binary', 'they', 'them', 'their', 'themself'),
     ('Female', 'she', 'her', 'her', 'herself'),
-    ('Transgender Female', 'she', 'her', 'her', 'herself'),
-    ('Male', 'he', 'him', 'his', 'himself'),
-    ('Transgender Male', 'he', 'him', 'his', 'himself');
-
+    ('Male', 'he', 'him', 'his', 'himself');
 
 INSERT INTO character_generator.random_culture(
 	name, culture_mod, skill_bonuses, native_literacy, foreign_literacy, items, environment, hobby, weight)
